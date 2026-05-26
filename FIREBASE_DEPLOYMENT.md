@@ -35,33 +35,32 @@ gcloud auth application-default login
 3. Enable deploy services:
 
 ```bash
-gcloud config set project apexfan-mongodb-2026
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com secretmanager.googleapis.com
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com secretmanager.googleapis.com --project apexfan-mongodb-2026
 ```
 
 4. Create required secrets:
 
 ```bash
-printf 'YOUR_MONGODB_URI' | gcloud secrets create MONGODB_URI --data-file=-
-printf 'YOUR_GEMINI_API_KEY' | gcloud secrets create GEMINI_API_KEY --data-file=-
+printf 'YOUR_MONGODB_URI' | gcloud secrets create MONGODB_URI --data-file=- --project apexfan-mongodb-2026
+printf 'YOUR_GEMINI_API_KEY' | gcloud secrets create GEMINI_API_KEY --data-file=- --project apexfan-mongodb-2026
 ```
 
-5. Deploy the API:
+5. Deploy the API and Hosting from this folder:
 
 ```bash
-gcloud run deploy apex-fan-mongodb \
-  --source . \
-  --region us-central1 \
-  --allow-unauthenticated \
-  --min-instances 0 \
-  --max-instances 1 \
-  --cpu 1 \
-  --memory 512Mi \
-  --set-secrets MONGODB_URI=MONGODB_URI:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest
+npm run deploy
 ```
 
-6. Deploy Firebase Hosting:
+This runs the folder-specific scripts in `package.json`, with `--project apexfan-mongodb-2026` already specified.
+
+API-only deploy:
 
 ```bash
-firebase deploy --only hosting --project apexfan-mongodb-2026
+npm run deploy:api
+```
+
+Hosting-only deploy:
+
+```bash
+npm run deploy:hosting
 ```

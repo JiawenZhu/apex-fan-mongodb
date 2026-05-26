@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "deploy:api": "gcloud run deploy apex-fan-mongodb --project apexfan-mongodb-2026 --source . --region us-central1 --allow-unauthenticated --min-instances 0 --max-instances 1 --cpu 1 --memory 512Mi --set-secrets MONGODB_URI=MONGODB_URI:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest",
+    "deploy:hosting": "firebase deploy --only hosting --project apexfan-mongodb-2026",
+    "deploy": "npm run deploy:api && npm run deploy:hosting"
   },
   "keywords": [
     "google-cloud",
