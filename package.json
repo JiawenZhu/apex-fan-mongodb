@@ -14,8 +14,9 @@
     "atlas:whoami": "atlas auth whoami",
     "deploy:api": "gcloud run deploy apex-fan-mongodb --project apexfan-mongodb-2026 --source . --region us-central1 --no-invoker-iam-check --min-instances 0 --max-instances 1 --cpu 1 --memory 512Mi --set-secrets MONGODB_URI=MONGODB_URI:latest",
     "deploy:api:with-gemini": "gcloud run deploy apex-fan-mongodb --project apexfan-mongodb-2026 --source . --region us-central1 --no-invoker-iam-check --min-instances 0 --max-instances 1 --cpu 1 --memory 512Mi --set-secrets MONGODB_URI=MONGODB_URI:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest",
+    "deploy:api:with-vertex": "gcloud run deploy apex-fan-mongodb --project apexfan-mongodb-2026 --source . --region us-central1 --no-invoker-iam-check --min-instances 0 --max-instances 1 --cpu 1 --memory 512Mi --set-env-vars USE_VERTEX_AI=true,GOOGLE_CLOUD_PROJECT=apexfan-mongodb-2026,GOOGLE_CLOUD_LOCATION=us-west1 --set-secrets MONGODB_URI=MONGODB_URI:latest",
     "deploy:hosting": "firebase deploy --only hosting --project apexfan-mongodb-2026",
-    "deploy": "npm run deploy:api && npm run deploy:hosting"
+    "deploy": "npm run deploy:api:with-vertex && npm run deploy:hosting"
   },
   "keywords": [
     "google-cloud",
@@ -29,7 +30,6 @@
   "license": "MIT",
   "dependencies": {
     "@google/genai": "^2.6.0",
-    "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongodb": "^6.6.2"
