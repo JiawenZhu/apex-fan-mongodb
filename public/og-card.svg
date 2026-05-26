@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">ApexFan MongoDB Track Agent</title>
+  <desc id="desc">Google Cloud Rapid Agent Hackathon 2026 demo card.</desc>
+  <rect width="1200" height="630" fill="#050d0a"/>
+  <circle cx="990" cy="105" r="250" fill="#064e3b" opacity="0.5"/>
+  <circle cx="160" cy="520" r="220" fill="#10b981" opacity="0.18"/>
+  <rect x="84" y="78" width="1032" height="474" rx="28" fill="#081a12" opacity="0.9" stroke="#10b981" stroke-width="3"/>
+  <text x="120" y="158" fill="#34d399" font-family="Arial, sans-serif" font-size="30" font-weight="700">GOOGLE CLOUD RAPID AGENT HACKATHON 2026</text>
+  <text x="120" y="272" fill="#e6f4ee" font-family="Arial, sans-serif" font-size="88" font-weight="800">ApexFan</text>
+  <text x="120" y="345" fill="#a3c9b8" font-family="Arial, sans-serif" font-size="36" font-weight="700">MongoDB Track · World Cup 2026 Concierge</text>
+  <text x="120" y="423" fill="#e6f4ee" font-family="Arial, sans-serif" font-size="30">Gemini + MongoDB Atlas + 2dsphere group planning</text>
+  <text x="120" y="487" fill="#34d399" font-family="Arial, sans-serif" font-size="28" font-weight="700">Live demo: apexfan-mongodb-2026.web.app/?demo=true</text>
+</svg>

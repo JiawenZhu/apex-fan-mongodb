@@ -109,5 +109,6 @@ ApexFan is fully open-source and distributed under the **MIT License**. The proj
 
 - Firebase project: `apexfan-mongodb-2026`
 - Hosting URL: `https://apexfan-mongodb-2026.web.app`
+- Judge auto-demo URL: `https://apexfan-mongodb-2026.web.app/?demo=true`
 - Cloud Run API service: `apex-fan-mongodb`
 - Deployment guide: `FIREBASE_DEPLOYMENT.md`

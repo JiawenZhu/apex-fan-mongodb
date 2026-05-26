@@ -377,4 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1200);
   });
 
+  if (new URLSearchParams(window.location.search).get('demo') === 'true') {
+    setTimeout(() => btnAutoDemo.click(), 700);
+  }
+
 });

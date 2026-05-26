@@ -2,11 +2,21 @@
 
 Track: MongoDB
 
+Live demo: https://apexfan-mongodb-2026.web.app/?demo=true
+Source repo: https://github.com/JiawenZhu/apex-fan-mongodb
+
+## Submission gate status
+
+- MIT `LICENSE` file exists and GitHub detects the license metadata.
+- Hosted Firebase demo is preloaded and does not require authentication.
+- Source repo is currently private by design; switch it public before the June 11, 2026 submission deadline.
+- Demo video is still a required external Devpost asset: keep it under 3 minutes with English audio or subtitles.
+
 ## 3-minute verification path
 
 1. Run `npm install && npm start`.
 2. Open `http://localhost:3000`.
-3. Click `Run Auto-Tour`.
+3. Click `Run Auto-Tour`, or open `https://apexfan-mongodb-2026.web.app/?demo=true`.
 4. Open `Judge Status Checks`.
 5. Verify live responses from `/api/status` and query samples from `/api/playbook`.
 

@@ -40,6 +40,20 @@ body.apex-dark {
   padding: 1.5rem;
 }
 
+.hackathon-banner {
+  width: 100%;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 8px;
+  background: rgba(6, 78, 59, 0.62);
+  color: var(--emerald-light);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 0.9rem;
+  padding: 0.48rem 0.75rem;
+}
+
 /* Header Styling */
 .apex-header {
   margin-bottom: 1.5rem;
