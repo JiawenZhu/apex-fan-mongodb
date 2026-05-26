@@ -14,6 +14,8 @@ Firebase Hosting serves the static UI in `public/`.
 
 Requests under `/api/**` are routed to Cloud Run so the Express API can keep using MongoDB Atlas and Gemini credentials without exposing secrets in the browser.
 
+The Cloud Run deploy script uses `--no-invoker-iam-check` because this Google account blocks public `allUsers` IAM bindings through domain-restricted sharing. Firebase Hosting remains the judge-facing public URL.
+
 ## Low-Cost Settings
 
 - Cloud Run `min-instances=0`
