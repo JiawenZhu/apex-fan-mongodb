@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const genai = process.env.GEMINI_API_KEY
   ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
   : null;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 // All 16 FIFA World Cup 2026 host stadiums (US, Canada, Mexico)
 const stadiums = [
@@ -373,21 +374,69 @@ app.get('/api/live-mongodb', async (req, res) => {
   }
 });
 
-// Build a context snapshot of available data to ground Gemini answers
-function buildDataContext() {
-  const itinerary = inMemoryItineraries[0];
-  const totalSpent = itinerary.activities.reduce((sum, a) => sum + a.cost, 0);
-  return `
-AVAILABLE STADIUMS (${stadiums.length} FIFA World Cup 2026 venues):
-${stadiums.map(s => `- ${s.name}, ${s.city}, ${s.country} | Cap: ${s.capacity} | Coords: [${s.coordinates.coordinates}]`).join('\n')}
+async function getGroundingSnapshot() {
+  if (!db) {
+    return {
+      source: 'in-memory fallback dataset',
+      stadiums,
+      nearbyMallsAndRestaurants,
+      itineraries: inMemoryItineraries,
+      latestAgentActions: agentActions.slice(0, 5)
+    };
+  }
 
-NEARBY MALLS & RESTAURANTS (2dsphere proximity indexed):
-${nearbyMallsAndRestaurants.map(m => `- ${m.name} (${m.type}) near ${m.stadiumId} | ${m.distance} mi | rating ${m.rating} | surge ${m.surgeLevel} | ${m.capacityStatus} | ${m.details}`).join('\n')}
+  try {
+    const [liveStadiums, liveCommerce, liveItineraries, liveAgentActions] = await Promise.all([
+      db.collection('stadiums').find({}).sort({ country: 1, city: 1 }).toArray(),
+      db.collection('malls').find({}).sort({ stadiumId: 1, distance: 1 }).toArray(),
+      db.collection('itineraries').find({}).toArray(),
+      db.collection('agent_actions').find({}).sort({ time: -1 }).limit(5).toArray()
+    ]);
+
+    return {
+      source: `MongoDB Atlas database "${db.databaseName}"`,
+      stadiums: liveStadiums.length ? liveStadiums : stadiums,
+      nearbyMallsAndRestaurants: liveCommerce.length ? liveCommerce : nearbyMallsAndRestaurants,
+      itineraries: liveItineraries.length ? liveItineraries : inMemoryItineraries,
+      latestAgentActions: liveAgentActions.length ? liveAgentActions : agentActions.slice(0, 5)
+    };
+  } catch (err) {
+    console.error('MongoDB grounding snapshot failed, using memory:', err.message);
+    return {
+      source: 'in-memory fallback dataset after MongoDB read error',
+      stadiums,
+      nearbyMallsAndRestaurants,
+      itineraries: inMemoryItineraries,
+      latestAgentActions: agentActions.slice(0, 5)
+    };
+  }
+}
+
+// Build a context snapshot of available data to ground Gemini answers.
+async function buildDataContext() {
+  const snapshot = await getGroundingSnapshot();
+  const itinerary = snapshot.itineraries[0] || inMemoryItineraries[0];
+  const totalSpent = itinerary.activities.reduce((sum, a) => sum + a.cost, 0);
+  const itineraryStadium = snapshot.stadiums.find(s => s.id === itinerary.stadiumId);
+  return `
+GROUNDING SOURCE: ${snapshot.source}
+
+AVAILABLE STADIUMS (${snapshot.stadiums.length} FIFA World Cup 2026 venues):
+${snapshot.stadiums.map(s => `- ${s.name}, ${s.city}, ${s.country} | Cap: ${s.capacity} | Coords: [${s.coordinates?.coordinates || []}]`).join('\n')}
+
+NEARBY MALLS & RESTAURANTS (${snapshot.nearbyMallsAndRestaurants.length} records, 2dsphere proximity indexed):
+${snapshot.nearbyMallsAndRestaurants.map(m => {
+  const coords = Array.isArray(m.coordinates) ? m.coordinates : m.coordinates?.coordinates;
+  return `- ${m.name} (${m.type}) near ${m.stadiumId} | ${m.distance} mi | rating ${m.rating} | surge ${m.surgeLevel} | ${m.capacityStatus} | coords [${coords || []}] | ${m.details}`;
+}).join('\n')}
 
 ACTIVE GROUP ITINERARY (group-101 | Members: ${itinerary.members.join(', ')}):
-- Match date: ${itinerary.matchDate} at ${stadiums.find(s => s.id === itinerary.stadiumId)?.name || itinerary.stadiumId}
+- Match date: ${itinerary.matchDate} at ${itineraryStadium?.name || itinerary.stadiumId}
 - Budget: $${itinerary.budget.total} total, $${totalSpent} spent (${((totalSpent / itinerary.budget.total) * 100).toFixed(1)}% used)
 - Activities: ${itinerary.activities.map(a => `[${a.time}] ${a.title} ($${a.cost})`).join(' | ')}
+
+LATEST AGENT AUDIT ACTIONS:
+${snapshot.latestAgentActions.map(a => `- ${a.time}: ${a.action} — ${a.detail}`).join('\n')}
 `;
 }
 
@@ -432,9 +481,9 @@ app.post('/api/chat', async (req, res) => {
     });
 
     if (genai) {
-      const systemInstruction = SYSTEM_PROMPT.replace('{{DATA_CONTEXT}}', buildDataContext());
+      const systemInstruction = SYSTEM_PROMPT.replace('{{DATA_CONTEXT}}', await buildDataContext());
       const model = genai.getGenerativeModel({
-        model: 'gemini-1.5-flash',
+        model: GEMINI_MODEL,
         systemInstruction,
       });
       const result = await model.generateContent(message);
