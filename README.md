@@ -103,6 +103,7 @@ ApexFan is fully open-source and distributed under the **MIT License**. The proj
 - `JUDGE_CHECKLIST.md` maps judging criteria to concrete demo evidence.
 - `DEMO_SCRIPT.md` provides a 3-minute walkthrough flow.
 - `LICENSE` contains the MIT license text for repository scanning.
+- `MONGODB_SETUP.md` documents MongoDB CLI, Atlas CLI, and API verification commands.
 
 ## Firebase Hosting Target
 
