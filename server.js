@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { GoogleGenAI } = require('@google/genai');
 
 // Load environment variables
 dotenv.config();
@@ -13,11 +13,43 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Gemini client (falls back to mock if no key)
-const genai = process.env.GEMINI_API_KEY
-  ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
-  : null;
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT;
+const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'us-west1';
+const USE_VERTEX_AI = process.env.USE_VERTEX_AI === 'true'
+  || process.env.GOOGLE_GENAI_USE_VERTEXAI === 'true'
+  || (!process.env.GEMINI_API_KEY && Boolean(GOOGLE_CLOUD_PROJECT));
+
+function createAiClient() {
+  if (USE_VERTEX_AI) {
+    if (!GOOGLE_CLOUD_PROJECT) return null;
+    return new GoogleGenAI({
+      vertexai: true,
+      project: GOOGLE_CLOUD_PROJECT,
+      location: GOOGLE_CLOUD_LOCATION
+    });
+  }
+
+  if (process.env.GEMINI_API_KEY) {
+    return new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  }
+
+  return null;
+}
+
+const genai = createAiClient();
+const aiMode = genai
+  ? (USE_VERTEX_AI ? `Vertex AI (${GOOGLE_CLOUD_PROJECT}/${GOOGLE_CLOUD_LOCATION})` : 'Gemini Developer API key')
+  : 'Mock Mode (No Gemini or Vertex credentials)';
+
+async function generateGeminiText(contents, systemInstruction) {
+  const response = await genai.models.generateContent({
+    model: GEMINI_MODEL,
+    contents,
+    config: systemInstruction ? { systemInstruction } : undefined
+  });
+  return response.text || '';
+}
 
 // All 16 FIFA World Cup 2026 host stadiums (US, Canada, Mexico)
 const stadiums = [
@@ -266,7 +298,6 @@ db.agent_actions.insertOne({
 
 // `/api/status` for the judge self-verification portal
 app.get('/api/status', (req, res) => {
-  const geminiStatus = process.env.GEMINI_API_KEY ? 'Active (Ready)' : 'Mock Mode (Demo Key Missing)';
   res.json({
     database: {
       status: db ? 'PASS' : 'WARNING',
@@ -281,8 +312,9 @@ app.get('/api/status', (req, res) => {
     },
     geminiEngine: {
       status: 'PASS',
-      mode: geminiStatus,
-      fallbackChain: 'Gemini 3.0 Pro -> Gemini 2.5 Flash'
+      mode: aiMode,
+      model: GEMINI_MODEL,
+      fallbackChain: 'Vertex AI / ADC -> Gemini Developer API key -> deterministic fallback'
     },
     groupSyncEngine: {
       status: 'PASS',
@@ -482,12 +514,7 @@ app.post('/api/chat', async (req, res) => {
 
     if (genai) {
       const systemInstruction = SYSTEM_PROMPT.replace('{{DATA_CONTEXT}}', await buildDataContext());
-      const model = genai.getGenerativeModel({
-        model: GEMINI_MODEL,
-        systemInstruction,
-      });
-      const result = await model.generateContent(message);
-      reply = result.response.text();
+      reply = await generateGeminiText(message, systemInstruction);
     } else {
       // Fallback: data-grounded mock responses when no API key
       reply = buildFallbackReply(lowercaseMsg);
