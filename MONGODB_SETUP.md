@@ -18,6 +18,22 @@ mongosh --version
 atlas --version
 ```
 
+## Current Atlas Resources
+
+- Atlas account: `zhujiawen519@gmail.com`
+- Atlas organization ID: `607f4b9604a3a91e1bd026df`
+- Atlas project: `ApexFan MongoDB 2026`
+- Atlas project ID: `6a14fb4a422e337401bad234`
+- Cluster: `apexfan-m0`
+- Tier/provider/region: `M0` on `GCP` in `CENTRAL_US`
+- Database: `apexfan`
+- App user: `apexfan_app`
+
+The database user password and connection URI are stored only in ignored local files:
+
+- `.env`
+- `.secrets/mongodb-uri.txt`
+
 ## Local Connection
 
 Add the Atlas connection string to `.env`:
@@ -103,6 +119,13 @@ For deployment, create the MongoDB URI secret in the ApexFan Google Cloud projec
 
 ```bash
 printf 'YOUR_MONGODB_URI' | gcloud secrets create MONGODB_URI --data-file=- --project apexfan-mongodb-2026
+```
+
+Current blocker: `apexfan-mongodb-2026` needs billing attached before `secretmanager.googleapis.com` can be enabled. After billing is attached, create the secret from the ignored local URI file:
+
+```bash
+gcloud services enable secretmanager.googleapis.com --project apexfan-mongodb-2026
+gcloud secrets create MONGODB_URI --data-file=.secrets/mongodb-uri.txt --project apexfan-mongodb-2026
 ```
 
 After the secret exists, the folder-local deploy command includes it automatically:
