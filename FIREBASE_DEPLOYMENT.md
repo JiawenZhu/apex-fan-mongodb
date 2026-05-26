@@ -52,11 +52,18 @@ npm run deploy
 ```
 
 This runs the folder-specific scripts in `package.json`, with `--project apexfan-mongodb-2026` already specified.
+The default API deploy requires `MONGODB_URI`. If `GEMINI_API_KEY` is also configured as a Cloud Secret, use `npm run deploy:api:with-gemini` for the API step.
 
 API-only deploy:
 
 ```bash
 npm run deploy:api
+```
+
+API-only deploy with Gemini:
+
+```bash
+npm run deploy:api:with-gemini
 ```
 
 Hosting-only deploy:
