@@ -56,45 +56,23 @@ The app uses MongoDB Atlas data as the operational source of truth and Gemini as
 
 ## Screenshot Tour
 
-These screenshots were captured for the final hackathon video and are included here so reviewers can quickly understand both the frontend experience and the backend evidence.
+The README intentionally keeps screenshots limited: one frontend view, one overall video contact sheet, and three MongoDB Atlas backend evidence captures. Additional captures are preserved in the demo-video folder for video production and QA.
 
-### Frontend Product Flow
+### Frontend
 
-![Home dashboard](demo-video/assets/screenshots/frontend/01-home-dashboard.png)
+The dashboard screenshot at the top of this README shows the primary user experience: chat, itinerary, evidence, status checks, and group planning in one product surface.
 
-![Chat retrieval evidence](demo-video/assets/screenshots/frontend/02-chat-retrieval-evidence.png)
-
-![User Status Checks](demo-video/assets/screenshots/frontend/03-user-status-checks.png)
-
-![Playbook and retrieval trace](demo-video/assets/screenshots/frontend/04-playbook-retrieval-trace.png)
-
-![Group decision room](demo-video/assets/screenshots/frontend/05-group-decision-room.png)
-
-![Footer verification](demo-video/assets/screenshots/frontend/06-footer-verification.png)
-
-### MongoDB Atlas Backend Evidence
-
-![Atlas clusters overview](demo-video/assets/screenshots/backend/01-atlas-clusters-overview.png)
-
-![Data Explorer collections](demo-video/assets/screenshots/backend/02-data-explorer-collections.png)
-
-![ApexFan database expanded](demo-video/assets/screenshots/backend/03-apexfan-database-expanded.png)
-
-![Stadium documents](demo-video/assets/screenshots/backend/04-stadiums-documents.png)
-
-![Fan profile documents](demo-video/assets/screenshots/backend/05-fan-profiles-documents.png)
-
-![Nearby commerce documents](demo-video/assets/screenshots/backend/06-malls-documents.png)
-
-![Malls indexes](demo-video/assets/screenshots/backend/07-malls-indexes.png)
-
-![2dsphere index evidence](demo-video/assets/screenshots/backend/08-malls-2dsphere-indexes.png)
-
-### Final Video QA Frames
+### Overall Demo Proof
 
 ![Judge review contact sheet](demo-video/review-frames/judge-review-contact-sheet.png)
 
-![Encoded video geospatial frame](demo-video/remotion-workspace/renders/video/apexfan-v3-final-encoded-frame-98s.png)
+### MongoDB Atlas Backend Evidence
+
+![ApexFan database expanded](demo-video/assets/screenshots/backend/03-apexfan-database-expanded.png)
+
+![Fan profile documents](demo-video/assets/screenshots/backend/05-fan-profiles-documents.png)
+
+![2dsphere index evidence](demo-video/assets/screenshots/backend/08-malls-2dsphere-indexes.png)
 
 ---
 
