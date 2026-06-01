@@ -2,6 +2,7 @@
 
 Video: `renders/video/apexfan-hackathon-demo-v3-final.mp4`
 Duration: 2:22
+YouTube upload runbook: `../YOUTUBE_UPLOAD.md`
 Track: Google Cloud Rapid Agent Hackathon - MongoDB
 
 This file is written from a judge's perspective: what should be easy to verify, what technical depth is shown, and why the demo is more than a polished mockup.

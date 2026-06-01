@@ -21,6 +21,7 @@ It combines a fan-facing concierge UI with MongoDB-backed venue, commerce, itine
 - Live app: [https://apexfan-mongodb-2026.web.app/](https://apexfan-mongodb-2026.web.app/)
 - One-click demo: [https://apexfan-mongodb-2026.web.app/?demo=true](https://apexfan-mongodb-2026.web.app/?demo=true)
 - Final demo video: [demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4](demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4)
+- YouTube upload workflow: [YOUTUBE_UPLOAD.md](YOUTUBE_UPLOAD.md)
 - Judge checklist: [JUDGE_CHECKLIST.md](JUDGE_CHECKLIST.md)
 - Demo script: [DEMO_SCRIPT.md](DEMO_SCRIPT.md)
 - MongoDB setup and verification: [MONGODB_SETUP.md](MONGODB_SETUP.md)
@@ -323,6 +324,7 @@ APEXFAN_API_URL=https://apexfan-mongodb-2026.web.app npm run mongodb:api
 The professional demo video package lives in [demo-video/](demo-video/).
 
 - Final render: [demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4](demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4)
+- YouTube upload runbook: [YOUTUBE_UPLOAD.md](YOUTUBE_UPLOAD.md)
 - Duration: 2:22
 - Format: 1920x1080 H.264 MP4 with AAC audio
 - TTS: Gemini 3.1 Flash TTS

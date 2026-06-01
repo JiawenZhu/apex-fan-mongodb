@@ -8,6 +8,7 @@ Professional 3-5 minute demo package for the Google Cloud Rapid Agent Hackathon 
 - Gemini 3.1 Flash TTS audio: `renders/audio/apexfan-gemini-31-flash-tts-tight-v3.mp3`
 - Duration: 2:22
 - Format: 1920x1080 H.264 MP4 with AAC audio
+- YouTube upload runbook: `../YOUTUBE_UPLOAD.md`
 - Style: action-led product demo with cursor movement, click ripples, zoom-in focus regions, and animated evidence overlays.
 - Timing: tight-cut pacing with padded voiceover gaps removed and scene starts visible immediately.
 
