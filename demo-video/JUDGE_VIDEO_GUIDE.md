@@ -1,6 +1,7 @@
 # ApexFan Demo Video Judge Guide
 
-Video: [YouTube Link](https://www.youtube.com/watch?v=SnqhCoHUuro)
+Video: [Watch on YouTube](https://www.youtube.com/watch?v=SnqhCoHUuro)
+Local render: `renders/video/apexfan-hackathon-demo-v3-final.mp4`
 Duration: 2:22
 YouTube upload runbook: `../YOUTUBE_UPLOAD.md`
 Track: Google Cloud Rapid Agent Hackathon - MongoDB

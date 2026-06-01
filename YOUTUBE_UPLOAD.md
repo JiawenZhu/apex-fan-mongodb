@@ -2,6 +2,12 @@
 
 ApexFan's hackathon submission needs a YouTube URL, not only a repository-hosted MP4. Use this runbook to publish the final demo video and then update the README/Judge docs with the YouTube link.
 
+## Published Video
+
+- YouTube demo video: [https://www.youtube.com/watch?v=SnqhCoHUuro](https://www.youtube.com/watch?v=SnqhCoHUuro)
+- Status: uploaded and linked in the project README, judge checklist, demo-video README, and judge video guide.
+- Local final render: `demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4`
+
 ## Target Channel
 
 - YouTube user ID: `-1NezdkAYM_3qK-5mh_cnA`
@@ -9,7 +15,7 @@ ApexFan's hackathon submission needs a YouTube URL, not only a repository-hosted
 - Final ApexFan video file: `demo-video/renders/video/apexfan-hackathon-demo-v3-final.mp4`
 - Duration: `2:22`
 
-## Recommended Hackathon Path: Manual Upload
+## Recommended Hackathon Path For Future Videos: Manual Upload
 
 Manual upload through YouTube Studio is the safest immediate path for Devpost because it can publish the video as **Unlisted** without waiting for YouTube Data API project audit.
 
@@ -108,9 +114,9 @@ Use this only after the Google Cloud OAuth project is ready and YouTube upload v
 }
 ```
 
-## After Upload
+## After Upload For Future Videos
 
-Once the URL is available, replace the placeholder in docs with:
+Once the URL is available, replace the placeholder in docs with the actual YouTube URL:
 
 ```text
 YouTube demo video: https://www.youtube.com/watch?v=VIDEO_ID
