@@ -4,7 +4,7 @@ Professional 3-5 minute demo package for the Google Cloud Rapid Agent Hackathon 
 
 ## Final Render
 
-- Video: `renders/video/apexfan-hackathon-demo-v3-final.mp4`
+- Video: [YouTube Link](https://www.youtube.com/watch?v=SnqhCoHUuro)
 - Gemini 3.1 Flash TTS audio: `renders/audio/apexfan-gemini-31-flash-tts-tight-v3.mp3`
 - Duration: 2:22
 - Format: 1920x1080 H.264 MP4 with AAC audio

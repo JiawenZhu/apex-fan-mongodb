@@ -10,7 +10,7 @@ Source repo: https://github.com/JiawenZhu/apex-fan-mongodb
 - MIT `LICENSE` file exists and GitHub detects the license metadata.
 - Hosted Firebase demo is preloaded and does not require authentication.
 - Source repo is currently private by design; switch it public before the June 11, 2026 submission deadline.
-- Demo video is still a required external Devpost asset: keep it under 3 minutes with English audio or subtitles.
+- Demo video: [Watch the 3-minute walkthrough on YouTube](https://www.youtube.com/watch?v=SnqhCoHUuro)
 
 ## 3-minute verification path
 
