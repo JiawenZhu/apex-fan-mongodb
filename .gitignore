@@ -10,3 +10,15 @@ yarn-error.log*
 coverage/
 dist/
 build/
+
+# Demo-video generated intermediates. Keep the final render and selected QA
+# frames staged explicitly when they are part of a README or submission update.
+demo-video/renders/video/apexfan-hackathon-demo.mp4
+demo-video/renders/video/apexfan-hackathon-demo-v2.mp4
+demo-video/renders/video/apexfan-hackathon-demo-v3-tight.mp4
+demo-video/renders/audio/apexfan-gemini-31-flash-tts.mp3
+demo-video/renders/audio/apexfan-gemini-31-flash-tts-v2.mp3
+demo-video/remotion-workspace/renders/video/*
+!demo-video/remotion-workspace/renders/video/apexfan-v3-final-encoded-frame-98s.png
+demo-video/remotion-workspace/public/audio/gemini-31-flash-tts/*
+!demo-video/remotion-workspace/public/audio/gemini-31-flash-tts/combined-gemini-31-flash-tts-tight-v3.mp3

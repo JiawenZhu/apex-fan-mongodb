@@ -1,0 +1,60 @@
+{
+  "video_timeline_sync": [
+    {
+      "scene_index": 1,
+      "start_seconds": 0,
+      "estimated_duration_seconds": 21,
+      "title": "World Cup group planning hook",
+      "audio_tts_script": "Picture this: the match ends, six friends are outside SoFi Stadium, everyone is hungry, the budget is not unlimited, and nobody agrees where to go next. ApexFan turns that messy group moment into one venue-aware plan, with food, retail, budget, votes, and evidence behind every recommendation."
+    },
+    {
+      "scene_index": 2,
+      "start_seconds": 21,
+      "estimated_duration_seconds": 18,
+      "title": "Ask the app like a fan",
+      "audio_tts_script": "Now the user takes action. They ask: what should our group do near SoFi after the match? ApexFan treats that like a real planning request, not a generic chatbot prompt. The app starts from the venue, the group context, and the nearby commerce data."
+    },
+    {
+      "scene_index": 3,
+      "start_seconds": 39,
+      "estimated_duration_seconds": 17,
+      "title": "Open the retrieval evidence",
+      "audio_tts_script": "Next, the user opens the evidence trail. This is the judge-visible trust layer. The answer shows MongoDB collections, operations, documents read, and grounding evidence, so the recommendation is inspectable instead of black-box text."
+    },
+    {
+      "scene_index": 4,
+      "start_seconds": 56,
+      "estimated_duration_seconds": 16,
+      "title": "Run user status checks",
+      "audio_tts_script": "The user can also run status checks. The app verifies the MongoDB connection, geospatial indexes, Gemini mode, retrieval trace, venue trust check, and fan memory. Claims become checks the reviewer can inspect."
+    },
+    {
+      "scene_index": 5,
+      "start_seconds": 72,
+      "estimated_duration_seconds": 18,
+      "title": "Prove the MongoDB Atlas backend",
+      "audio_tts_script": "Here is the backend proof. ApexFan is backed by MongoDB Atlas, with collections for stadiums, nearby commerce, itineraries, fan profiles, group decisions, and agent actions. MongoDB is the operational memory, not just a storage checkbox."
+    },
+    {
+      "scene_index": 6,
+      "start_seconds": 90,
+      "estimated_duration_seconds": 16,
+      "title": "Use geospatial intelligence",
+      "audio_tts_script": "The geospatial piece is what makes the demo useful. MongoDB two-D-sphere indexes connect stadiums to restaurants and retail by location. The app can explain distance, surge, capacity, rating, and why a place fits the group."
+    },
+    {
+      "scene_index": 7,
+      "start_seconds": 106,
+      "estimated_duration_seconds": 16,
+      "title": "Coordinate group memory and votes",
+      "audio_tts_script": "ApexFan also keeps the group plan moving. Synthetic fan profiles store safe preferences, while group decisions store proposals and votes. The recommendation can reflect accessibility, budget, late dinner needs, and the current group consensus."
+    },
+    {
+      "scene_index": 8,
+      "start_seconds": 122,
+      "estimated_duration_seconds": 20,
+      "title": "Judge-ready verification close",
+      "audio_tts_script": "Finally, the judge can verify the story in minutes. Open the hosted demo, run the guided flow, inspect retrieval evidence, and call the status, live MongoDB, and retrieval trace endpoints. ApexFan is a practical World Cup concierge and a reusable pattern for event-scale agents."
+    }
+  ]
+}
